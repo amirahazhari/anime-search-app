@@ -30,13 +30,13 @@ export default function SearchPage() {
         placeholder="Search anime..."
         value={localQuery}
         onChange={onChange}
-        style={{ width: '100%', padding: 10, fontSize: 16 }}
+        className="search-input"
       />
       {loading && <p>Loading...</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
       {!loading && results.length === 0 && debouncedQuery && <p>No results found.</p>}
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 12, marginTop: 16 }}>
+      <div className="anime-grid">
         {results.map((anime) => (
           <Link to={`/anime/${anime.mal_id}`} key={anime.mal_id} style={{ textDecoration: 'none' }}>
             <AnimeCard anime={anime} />

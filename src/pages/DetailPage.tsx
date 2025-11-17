@@ -23,14 +23,14 @@ export default function DetailPage() {
 
   return (
     <div style={{ padding: 20 }}>
-      <Link to="/">← Back</Link>
+      <Link to="/" className="back-link">← Back</Link>
       {loading && <p>Loading...</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
       {data && (
         <div>
-          <h1>{data.title}</h1>
-          <img src={data.images?.jpg?.image_url} alt={data.title} style={{ width: 300 }} />
-          <p>{data.synopsis}</p>
+          <h1 className="detail-title">{data.title}</h1>
+          <img src={data.images?.jpg?.image_url} alt={data.title} className="detail-img" />
+          <p  className="detail-text">{data.synopsis}</p>
           <p>Episodes: {data.episodes}</p>
           <p>Score: {data.score}</p>
         </div>

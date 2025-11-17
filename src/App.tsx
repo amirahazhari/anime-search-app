@@ -5,9 +5,11 @@ import DetailPage from './pages/DetailPage'
 
 export default function App() {
   return (
+  <div className="app-container">
     <Routes>
       <Route path="/" element={<SearchPage />} />
       <Route path="/anime/:id" element={<DetailPage />} />
     </Routes>
+  </div>
   )
 }
