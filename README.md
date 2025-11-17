@@ -27,3 +27,17 @@ This project is deployed at: https://search-anime00.netlify.app/
 ✔ Fully SPA (Single Page App)
 ✔ No environment variables needed
 ✔ Dev server runs on port 4000
+
+## Bonus Implementation
+
+### User Experience Improvements
+- **Skeleton Loaders** for the search page to provide a smoother loading experience and prevent layout shifts.
+- **Empty State Message** with helpful guidance when no results are found.
+- **Centered Pagination Controls** with intuitive left/right arrow buttons for a clean UI.
+- **Mobile-Responsive Layout** with optimized grid and detail-page responsiveness.
+
+### UI / Styling Enhancements
+- **Netflix-Inspired Detail Page** with two-column layout for metadata and synopsis.
+- **Red Netflix-Style Button Components** for primary/secondary actions.
+
+
