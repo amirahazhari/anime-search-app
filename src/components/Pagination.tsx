@@ -6,9 +6,16 @@ export default function Pagination({ current, total, onChange }: { current: numb
   const next = () => onChange(Math.min(total, current + 1))
   return (
    <div className="pagination">
-      <button onClick={prev} disabled={current === 1}>Prev</button>
-      <span>Page {current} / {total}</span>
-      <button onClick={next} disabled={current === total}>Next</button>
-    </div>
+  <button className="arrow-btn" onClick={prev} disabled={current === 1}>
+    <span className="arrow left"></span>
+  </button>
+
+  <span className="page-number">Page {current} / {total}</span>
+
+  <button className="arrow-btn" onClick={next} disabled={current === total}>
+    <span className="arrow right"></span>
+  </button>
+</div>
+
   )
 }

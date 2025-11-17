@@ -7,8 +7,8 @@
 
 body {
   font-family: "Inter", sans-serif;
-  background: #f4f4f7;
-  color: #222;
+  background: #141414;
+  color: #fff;
   padding-bottom: 50px;
 }
 
@@ -38,8 +38,8 @@ h1 {
 }
 
 .search-input:focus {
-  border-color: #7b5cff;
-  box-shadow: 0 0 0 3px rgba(123, 92, 255, 0.2);
+  border-color: #e50914;
+  box-shadow: 0 0 0 3px rgba(184, 27, 27, 0.2);
 }
 
 /* Anime grid */
@@ -52,11 +52,14 @@ h1 {
 
 /* Anime card */
 .card {
-  background: white;
+ background: white;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0,0,0,0.06);
   transition: 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 380px; /* FIXED CARD HEIGHT */
 }
 
 .card:hover {
@@ -72,49 +75,117 @@ h1 {
 
 .card-content {
   padding: 12px;
+  flex: 1; /* fill remaining space */
+  display: flex;
+  flex-direction: column;
 }
 
 .card-title {
   font-size: 15px;
   font-weight: 600;
   margin-bottom: 6px;
+  color:black;
 }
 
 .card-desc {
   font-size: 12px;
   color: #666;
-  line-height: 1.4;
 }
 
 /* Pagination */
 .pagination {
   display: flex;
   justify-content: center;
+  align-items:center;
   gap: 10px;
   margin-top: 30px;
 }
 
-.pagination button {
-  padding: 10px 16px;
-  border-radius: 10px;
+.arrow-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   border: none;
-  background: #7b5cff;
-  color: white;
-  font-weight: 600;
+  background: #e50914;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: 0.25s ease;
 }
 
-.pagination button:disabled {
-  background: #b7a8ff;
+.arrow-btn:hover:not(:disabled) {
+  background: #f6121d;
+  transform: scale(1.05);
+}
+
+.arrow-btn:disabled {
+  background: #bdbdbd;
   cursor: not-allowed;
 }
 
-.pagination button:hover:not(:disabled) {
-  background: #5a3df1;
+.arrow {
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  padding: 6px;
+  display: inline-block;
 }
 
+.left {
+  transform: rotate(135deg);
+}
+
+.right {
+  transform: rotate(-45deg);
+}
+
+.page-number {
+  font-weight: 600;
+  color: #fff;
+  text-align:center;
+}
+
+
 /* Detail page */
+.detail-wrapper {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* left bigger */
+  gap: 40px;
+}
+
+.detail-left {
+  color: #e5e5e5;
+}
+
+.detail-right {
+  color: #b3b3b3;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.detail-section-title {
+  color: white;
+  font-weight: 600;
+  margin-bottom: 4px;
+  font-size: 15px;
+}
+
+/* For items like genre list */
+.detail-meta-item span {
+  color: white;
+  font-weight: 500;
+}
+
+.detail-synopsis {
+  line-height: 1.6;
+  color: #cccccc;
+  max-width: 700px;
+  margin-top: 12px;
+}
+
 .detail-container {
   margin-top: 20px;
 }
@@ -135,17 +206,50 @@ h1 {
   max-width: 700px;
   line-height: 1.6;
   font-size: 15px;
-  color: #444;
+  color: #fff;
 }
 
 .back-link {
-  display: inline-block;
-  margin-bottom: 20px;
-  color: #7b5cff;
+   background-color: transparent;
+  border: 2px solid #e50914;
+  color: #e50914;
+  padding: 10px 18px;
+  border-radius: 8px;
   font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.25s ease;
   text-decoration: none;
 }
 
 .back-link:hover {
-  text-decoration: underline;
+ background-color: #e50914;
+  color: white;
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #2c2c2c 25%, #3a3a3a 50%, #2c2c2c 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.skeleton-card {
+  height: 380px;
+  border-radius: 12px;
+}
+
+/* mobile*/
+@media (max-width: 700px) {
+  .detail-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .anime-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
 }

@@ -13,10 +13,15 @@ export default function SearchPage() {
   const [localQuery, setLocalQuery] = useState(query)
   const debouncedQuery = useDebouncedValue(localQuery, 250)
 
-  useEffect(() => {
-    dispatch(setQuery(debouncedQuery))
-    dispatch(fetchSearch({ query: debouncedQuery, page }))
-  }, [debouncedQuery, page, dispatch])
+  // Runs ONLY when user stops typing
+useEffect(() => {
+  dispatch(setQuery(debouncedQuery))
+}, [debouncedQuery, dispatch])
+
+// Runs when query OR page changes
+useEffect(() => {
+  dispatch(fetchSearch({ query, page }))
+}, [query, page, dispatch])
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLocalQuery(e.target.value)
@@ -32,17 +37,31 @@ export default function SearchPage() {
         onChange={onChange}
         className="search-input"
       />
-      {loading && <p>Loading...</p>}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      {!loading && results.length === 0 && debouncedQuery && <p>No results found.</p>}
+      {/* SKELETON LOADING */}
+{loading && (
+  <div className="anime-grid">
+    {[...Array(8)].map((_, i) => (
+      <div key={i} className="card skeleton-card skeleton"></div>
+    ))}
+  </div>
+)}
 
-      <div className="anime-grid">
-        {results.map((anime) => (
-          <Link to={`/anime/${anime.mal_id}`} key={anime.mal_id} style={{ textDecoration: 'none' }}>
-            <AnimeCard anime={anime} />
-          </Link>
-        ))}
-      </div>
+{!loading && results.length === 0 && debouncedQuery && (
+  <div style={{ marginTop: 40, textAlign: "center", opacity: 0.7 }}>
+    <h2>No results found 😢</h2>
+    <p>Try searching for something else.</p>
+  </div>
+)}
+
+{!loading && results.length > 0 && (
+  <div className="anime-grid">
+    {results.map((anime) => (
+      <Link to={`/anime/${anime.mal_id}`} key={anime.mal_id} style={{ textDecoration: 'none' }}>
+        <AnimeCard anime={anime} />
+      </Link>
+    ))}
+  </div>
+)}
 
       <div style={{ marginTop: 20 }}>
         <Pagination current={page} total={totalPages} onChange={(p) => dispatch(setPage(p))} />
